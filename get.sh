@@ -13,7 +13,8 @@ do
   URL="$URL_BASE/$DATE"
   DIR="$DIR_BASE/$DATE"
   FILE="$DIR/$FILE_NAME"
-  echo "  <file>$FILE</file>" >> $FILE_MAP
+  REL_FILE="../$DATE/$FILE_NAME"
+  echo "  <file>$REL_FILE</file>" >> $FILE_MAP
 #  if [ ! -d $DIR ]; then
 #    mkdir $DIR
 #    wget --output-document=$FILE $URL
