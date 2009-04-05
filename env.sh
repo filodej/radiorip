@@ -1,5 +1,5 @@
 #! /bin/bash
-BASE_DIR="input"
+BASE_DIR="program"
 FILE_NAME="today.xml"
 BASE_URL="http://www2.rozhlas.cz/program/xml"
 DATE_MASK="+%Y-%m-%d"
