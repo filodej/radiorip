@@ -1,1 +1,3 @@
-xsltproc -o input/2009-04-05/preview.xml merge.xslt input/2009-04-05/files.xml
+#! /bin/bash
+source `dirname $0`/env.sh
+xsltproc -o $TODAY_PROGRAM_BASE.xml merge.xslt $TODAY_FILES
