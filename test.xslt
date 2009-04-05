@@ -31,7 +31,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<xsl:apply-templates select="porad/typporadu_nazev">
+				<xsl:apply-templates select="porad/typporadu_nazev[count(.|key('group', @id)[1])=1]">
  				    <xsl:sort select="@id" />
 				</xsl:apply-templates>
 			</tbody>
@@ -41,14 +41,12 @@
 </xsl:template>
 
 <xsl:template match="typporadu_nazev">
-  <xsl:if test="node()[count(.|key('group', @id)[1])=1]">
   	<tr name="filter">
 	    <td node="con:box" class="filter_box">
 		<input type="checkbox" checked="true" value="normal" onclick="hide_show( '0' , this.checked )" />
 	    </td>
 	    <td class="filter_name"><xsl:value-of select="text()"/></td>
 	</tr>
-  </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>
