@@ -1,0 +1,25 @@
+.body {text-align:left;font-family:helvetica,arial;}
+
+.filters_table {width:400pt;text-align:left;margin:0;padding:0;border-width:0;font-family:helvetica,arial;}
+.filters_table td {font-size:9pt;padding:0px 10px 0px 10px;border:1px solid #397de6;border-width:0 0 1px 0;vertical-align:top;}
+.filters_table a {color:#0065cd;text-decoration:none;font-size:8pt;font-weight:bold;}
+.filter_box {background-color: #E0FFFF;width:20px;}
+.filter_name {background-color:#FFFFFF;}
+
+.days_table {width:90%;text-align:left;margin:0;padding:0;border-width:0;font-family:helvetica,arial;}
+.days_table td {font-size:9pt;padding:4px 10px 4px 10px;border:1px solid #397de6;border-width:0px 1px 1px 0;vertical-align:top;}
+.days_table a {color:#0065cd;text-decoration:none;font-size:8pt;font-weight:bold;}
+.program_box {background-color: #E0FFFF;width:20px;}
+.program_hour {background-color:#FFFFDD;width:100px;padding-left:6px;font-size:7pt;}
+.program_name {background-color:#FFFFFF;}
+.station { width:40px;}
+.program_table {width:90%;text-align:left;margin:0;padding:0;border-width:0;font-family:helvetica,arial;}
+.program_table td {font-size:9pt;padding:4px 10px 4px 10px;border:1px solid #397de6;border-width:0px 1px 1px 0;vertical-align:top;}
+
+.processed_body {text-align:left;font-family:helvetica,arial;}
+.processed_table {width:90%;text-align:left;margin:0;padding:0;border-width:0;font-family:helvetica,arial;background-color:#FFFFFF;}
+.processed_table td {font-size:9pt;padding:4px 10px 4px 10px;border:1px solid #397de6;border-width:0px 1px 1px 0;vertical-align:top;}
+.processed_author {width:20%}
+.processed_name {width:60%}
+.processed_length {width:10%}
+.processed_link {width:10%}
