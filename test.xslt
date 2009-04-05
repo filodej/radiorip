@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <xsl:template match="/program/den">
@@ -28,18 +29,22 @@
 				</tr>
 			</thead>
 			<tbody>
-			        <xsl:for-each-group select="porad/typporadu_nazev" group-by="@id">
-  				  <tr name="filter">
-				    <td node="con:box" class="filter_box">
-				      <input type="checkbox" checked="true" value="normal" onclick="hide_show( '0' , this.checked )" />
-				    </td>
-				    <td class="filter_name"><xsl:value-of select="text()"/></td>
-				  </tr>
-				</xsl:for-each-group>
+				<xsl:apply-templates select="porad/typporadu_nazev">
+ 				    <xsl:sort select="reference[not(@id=following::reference/@id)]" />
+				</xsl:apply-templates>
 			</tbody>
 		</table>
 	</body>
      </html>
+</xsl:template>
+
+<xsl:template match="typporadu_nazev">
+  	<tr name="filter">
+	    <td node="con:box" class="filter_box">
+		<input type="checkbox" checked="true" value="normal" onclick="hide_show( '0' , this.checked )" />
+	    </td>
+	    <td class="filter_name"><xsl:value-of select="text()"/></td>
+	</tr>
 </xsl:template>
 
 </xsl:stylesheet>
