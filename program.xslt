@@ -73,14 +73,16 @@
 					<a>
 						<xsl:attribute name="href">http://www.rozhlas.cz/<xsl:value-of select="url/text()"/></xsl:attribute>
 						<xsl:if test="popis/text()">
-							<xsl:attribute name="onmouseover">this.T_WIDTH=400; return escape('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
+							<xsl:attribute name="onmouseover">Tip('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
+							<xsl:attribute name="onmouseout">UnTip()</xsl:attribute>
 						</xsl:if>
 						<xsl:value-of select="nazev/text()"/>
 					</a>
 				</xsl:when>
 				<xsl:when test="popis/text()">
 					<span>
-						<xsl:attribute name="onmouseover">this.T_WIDTH=400; return escape('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
+						<xsl:attribute name="onmouseover">Tip('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
+						<xsl:attribute name="onmouseout">UnTip()</xsl:attribute>
 						<xsl:value-of select="nazev/text()"/>
 					</span>
 				</xsl:when>
