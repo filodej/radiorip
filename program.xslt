@@ -16,7 +16,7 @@
                 	 for ( var i=0; i &lt; elements.length; ++i  ) { elements[i].style.display = text }
             	}
 		</script>
-		<link rel="stylesheet" href="/templates/local.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="local.css" type="text/css" media="all" />
 	</head>
 	<body>
 		<h3>Filter podle typu</h3>
@@ -35,26 +35,13 @@
 				</xsl:apply-templates>
 			</tbody>
 		</table>
-<!--		<form action="schedule.py">
-		  <xsl:apply-templates select="den/porad/typporadu_nazev[count(.|key('group', @id)[1])=1]">
- 		    <xsl:sort select="@id" />
-				</xsl:apply-templates>
-			<div node="rep:day">
-				<h3 node="con:date">Sobota 1.1.</h3>
-				<table class="days_table">
-					<tr name="0" node="rep:program">
-						<td node="con:box" class="program_box"><input type="checkbox" value="normal" /></td>
-						<td node="con:time" class="program_hour">0:00</td>
-						<td node="con:station" class="station">CRo1</td>
-						<td node="con:name" class="program_name">Hra noci</td>
-					</tr>
-				</table>
-			</div>
-			<div width="90%" align="center"><input type="submit" value="Zařadit do fronty"></div>
+		<form action="schedule.py">
+			<xsl:apply-templates select="den"/>
+			<div width="90%" align="center"><input type="submit" value="Zaradit do fronty"/></div>
 		</form>
-		<script language="JavaScript" type="text/javascript" src="/scripts/wz_tooltip.js"></script>-->
-	</body>
-     </html>
+		<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
+	  </body>
+    </html>
 </xsl:template>
 
 <xsl:template match="typporadu_nazev">
@@ -63,6 +50,45 @@
 		<input type="checkbox" checked="true" value="normal" onclick="hide_show( '0' , this.checked )" />
 	    </td>
 	    <td class="filter_name"><xsl:value-of select="text()"/></td>
+	</tr>
+</xsl:template>
+
+<xsl:template match="den">
+	<div>
+		<h3 node="con:date"><xsl:value-of select="@datum"/></h3>
+		<table class="days_table">
+			<xsl:apply-templates select="porad"/>
+		</table>
+	</div>
+</xsl:template>
+
+<xsl:template match="porad">
+	<tr name="0">
+		<td class="program_box"><input type="checkbox" value="normal" /></td>
+		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
+		<td class="station"><xsl:value-of select="@stanice"/></td>
+		<td class="program_name">
+			<xsl:choose>
+				<xsl:when test="url">
+					<a>
+						<xsl:attribute name="href">http://www.rozhlas.cz/<xsl:value-of select="url/text()"/></xsl:attribute>
+						<xsl:if test="popis/text()">
+							<xsl:attribute name="onmouseover">this.T_WIDTH=400; return escape('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
+						</xsl:if>
+						<xsl:value-of select="nazev/text()"/>
+					</a>
+				</xsl:when>
+				<xsl:when test="popis/text()">
+					<span>
+						<xsl:attribute name="onmouseover">this.T_WIDTH=400; return escape('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
+						<xsl:value-of select="nazev/text()"/>
+					</span>
+				</xsl:when>
+				<xsl:otherwise>
+					<xsl:value-of select="nazev/text()"/>
+				</xsl:otherwise>
+			</xsl:choose>
+		</td>
 	</tr>
 </xsl:template>
 
