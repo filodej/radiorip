@@ -9,16 +9,41 @@
 		<title><xsl:value-of select="@date"/></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-2" />
 		<script language="JavaScript" type="text/javascript">
-            	function hide_show( id, show ) 
+                document.onload = setup_filters();
+
+            	function toggle_display( id, show ) 
 		{
                 	 var text =  ( show == true  ) ? '' : 'none'
                 	 var elements = document.getElementsByName( id );
-                	 for ( var i=0; i &lt; elements.length; ++i  ) { elements[i].style.display = text }
+                	 for ( var i=0; i &lt; elements.length; ++i ) 
+			   elements[i].style.display = text
             	}
+
+            	function toggle_checkbox( id, check ) 
+		{
+                	 var elements = document.getElementsByName( 'f' + id );
+                	 for ( var i=0; i &lt; elements.length; ++i ) 
+			   elements[i].checked = check
+            	}
+
+		function setup_filters()
+		{
+		  var location = window.location.href + "&amp;";
+                  var qi = location.indexOf("filters=");
+                  if ( qi != -1 )
+                  {
+                     var filter_ids = location.substring(qi+8).split("&amp;")[0].split(",");
+                     for ( var i=0; i &lt; filter_ids.length; ++i )
+                     {
+                       toggle_display( filter_ids[i], true );
+                       toggle_checkbox( filter_ids[i], true );
+                     }
+                  }
+		}
 		</script>
 		<link rel="stylesheet" href="local.css" type="text/css" media="all" />
 	</head>
-	<body>
+	<body onLoad="setup_filters()">
 		<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
 		<!--<h3 onmouseover="TagToTip('filters', STICKY, true, HEIGHT, 400, CLOSEBTN, true )" onmouseout="UnTip()">Filter podle typu</h3>-->
 		<span id="filters">
@@ -36,7 +61,7 @@
 </xsl:template>
 
 <xsl:template match="typporadu_nazev">
-	<input type="checkbox" checked="true" value="normal" onclick="hide_show( '{@id}' , this.checked )" onmouseover="Tip('{text()}')" onmouseout="UnTip()"/>
+	<input name="f{@id}" type="checkbox" value="normal" onclick="toggle_display('{@id}',this.checked)" onmouseover="Tip('{text()}')" onmouseout="UnTip()"/>
 </xsl:template>
 
 <xsl:template match="den">
@@ -49,7 +74,7 @@
 </xsl:template>
 
 <xsl:template match="porad">
-	<tr name="{typporadu_nazev/@id}">
+	<tr name="{typporadu_nazev/@id}" style="display:none">
 		<td class="program_box"><input type="checkbox" name="id" value="{@id}"/></td>
 		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
 		<td class="station"><img src="img/{@stanice}.gif" alt="{@stanice}"/></td>
