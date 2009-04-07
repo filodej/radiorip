@@ -22,21 +22,10 @@
 		<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
 		<!--<h3 onmouseover="TagToTip('filters', STICKY, true, HEIGHT, 400, CLOSEBTN, true )" onmouseout="UnTip()">Filter podle typu</h3>-->
 		<span id="filters">
-		<table class="filters_table">
-		       <thead>
-				<tr>
-					<th class="filter_box">
-					    <input type="checkbox" checked="true" value="normal" onclick="hide_show( 'filter' , this.checked )" />
-					</th>
-					<th>Typ poradu</th>
-				</tr>
-			</thead>
-			<tbody>
-				<xsl:apply-templates select="den/porad/typporadu_nazev[count(.|key('group', @id)[1])=1]">
- 				    <xsl:sort select="@id" />
-				</xsl:apply-templates>
-			</tbody>
-		</table>
+			<b>Filtr podle typu poradu:</b>
+			<xsl:apply-templates select="den/porad/typporadu_nazev[count(.|key('group', @id)[1])=1]">
+ 				<xsl:sort select="@id" />
+			</xsl:apply-templates>
 		</span>
 		<form action="schedule.py">
 			<xsl:apply-templates select="den"/>
@@ -47,12 +36,7 @@
 </xsl:template>
 
 <xsl:template match="typporadu_nazev">
-  	<tr name="filter">
-	    <td class="filter_box">
-		<input type="checkbox" checked="true" value="normal" onclick="hide_show( '{@id}' , this.checked )" />
-	    </td>
-	    <td class="filter_name"><xsl:value-of select="text()"/></td>
-	</tr>
+	<input type="checkbox" checked="true" value="normal" onclick="hide_show( '{@id}' , this.checked )" onmouseover="Tip('{text()}')" onmouseout="UnTip()"/>
 </xsl:template>
 
 <xsl:template match="den">
