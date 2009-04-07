@@ -66,7 +66,7 @@
 
 <xsl:template match="porad">
 	<tr name="{typporadu_nazev/@id}">
-		<td class="program_box"><input type="checkbox" value="normal" /></td>
+		<td class="program_box"><input type="checkbox" name="id" value="{@id}"/></td>
 		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
 		<td class="station"><img src="img/{@stanice}.gif" alt="{@stanice}"/></td>
 		<td class="program_name">
