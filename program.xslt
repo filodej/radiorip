@@ -19,7 +19,9 @@
 		<link rel="stylesheet" href="local.css" type="text/css" media="all" />
 	</head>
 	<body>
-		<h3>Filter podle typu</h3>
+		<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
+		<!--<h3 onmouseover="TagToTip('filters', STICKY, true, HEIGHT, 400, CLOSEBTN, true )" onmouseout="UnTip()">Filter podle typu</h3>-->
+		<span id="filters">
 		<table class="filters_table">
 		       <thead>
 				<tr>
@@ -35,19 +37,19 @@
 				</xsl:apply-templates>
 			</tbody>
 		</table>
+		</span>
 		<form action="schedule.py">
 			<xsl:apply-templates select="den"/>
 			<div width="90%" align="center"><input type="submit" value="Zaradit do fronty"/></div>
 		</form>
-		<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
 	  </body>
     </html>
 </xsl:template>
 
 <xsl:template match="typporadu_nazev">
   	<tr name="filter">
-	    <td node="con:box" class="filter_box">
-		<input type="checkbox" checked="true" value="normal" onclick="hide_show( '0' , this.checked )" />
+	    <td class="filter_box">
+		<input type="checkbox" checked="true" value="normal" onclick="hide_show( '{@id}' , this.checked )" />
 	    </td>
 	    <td class="filter_name"><xsl:value-of select="text()"/></td>
 	</tr>
@@ -55,7 +57,7 @@
 
 <xsl:template match="den">
 	<div>
-		<h3 node="con:date"><xsl:value-of select="@datum"/></h3>
+		<h3><xsl:value-of select="@datum"/></h3>
 		<table class="days_table">
 			<xsl:apply-templates select="porad"/>
 		</table>
@@ -63,7 +65,7 @@
 </xsl:template>
 
 <xsl:template match="porad">
-	<tr name="0">
+	<tr name="{typporadu_nazev/@id}">
 		<td class="program_box"><input type="checkbox" value="normal" /></td>
 		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
 		<td class="station"><img src="img/{@stanice}.gif" alt="{@stanice}"/></td>
