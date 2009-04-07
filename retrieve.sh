@@ -14,7 +14,7 @@ do
   REL_FILE="../$DATE/$FILE_NAME"
   echo "  <file>$REL_FILE</file>" >> $TODAY_FILES
 #  if [ ! -d $DIR ]; then
-    mkdir $DIR
+    mkdir -p $DIR
     wget --output-document=$FILE $URL
 #  fi
   DAY=$(($DAY + 1))

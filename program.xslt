@@ -66,12 +66,11 @@
 	<tr name="0">
 		<td class="program_box"><input type="checkbox" value="normal" /></td>
 		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
-		<td class="station"><xsl:value-of select="@stanice"/></td>
+		<td class="station"><img src="img/{@stanice}.gif" alt="{@stanice}"/></td>
 		<td class="program_name">
 			<xsl:choose>
 				<xsl:when test="url">
-					<a>
-						<xsl:attribute name="href">http://www.rozhlas.cz/<xsl:value-of select="url/text()"/></xsl:attribute>
+					<a href="http://www.rozhlas.cz/{url/text()}">
 						<xsl:if test="popis/text()">
 							<xsl:attribute name="onmouseover">Tip('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
 							<xsl:attribute name="onmouseout">UnTip()</xsl:attribute>
@@ -80,9 +79,7 @@
 					</a>
 				</xsl:when>
 				<xsl:when test="popis/text()">
-					<span>
-						<xsl:attribute name="onmouseover">Tip('<xsl:value-of select="popis/text()"/>')</xsl:attribute>
-						<xsl:attribute name="onmouseout">UnTip()</xsl:attribute>
+					<span onmouseover="Tip('{popis/text()}')" onmouseout="UnTip()">
 						<xsl:value-of select="nazev/text()"/>
 					</span>
 				</xsl:when>
