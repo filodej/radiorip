@@ -3,6 +3,8 @@
 <xsl:output method="html" indent="yes"/>
 <xsl:key name="group" match="*[local-name()='typporadu_nazev']" use="@id"/>
 
+<xsl:param name="filters">,1,2,7,10,11,13,14,15,17,19,20,21,22,24,34,35,41,45,47,</xsl:param>  
+
 <xsl:template match="/program">
     <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     	<head>
@@ -61,7 +63,10 @@
 </xsl:template>
 
 <xsl:template match="typporadu_nazev">
+    <xsl:if test="not(contains($filters,concat(',',@id,',')))">
+	<xsl:value-of select="@id"/>:
 	<input name="f{@id}" type="checkbox" value="normal" onclick="toggle_display('{@id}',this.checked)" onmouseover="Tip('{text()}')" onmouseout="UnTip()"/>
+    </xsl:if>
 </xsl:template>
 
 <xsl:template match="den">
@@ -74,7 +79,9 @@
 </xsl:template>
 
 <xsl:template match="porad">
-	<tr name="{typporadu_nazev/@id}" style="display:none">
+    <xsl:variable name="id" select="typporadu_nazev/@id"/>
+    <xsl:if test="not(contains($filters,concat(',',$id,',')))">
+	<tr name="{$id}" style="display:none">
 		<td class="program_box"><input type="checkbox" name="id" value="{@id}"/></td>
 		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
 		<td class="station"><img src="img/{@stanice}.gif" alt="{@stanice}"/></td>
@@ -100,6 +107,7 @@
 			</xsl:choose>
 		</td>
 	</tr>
+    </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>
