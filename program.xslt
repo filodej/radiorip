@@ -43,10 +43,10 @@
                   }
 		}
 		</script>
-		<link rel="stylesheet" href="local.css" type="text/css" media="all" />
+		<link rel="stylesheet" href="/stylesheets/local.css" type="text/css" media="all" />
 	</head>
 	<body onLoad="setup_filters()">
-		<script language="JavaScript" type="text/javascript" src="wz_tooltip.js"></script>
+		<script language="JavaScript" type="text/javascript" src="/scripts/wz_tooltip.js"></script>
 		<!--<h3 onmouseover="TagToTip('filters', STICKY, true, HEIGHT, 400, CLOSEBTN, true )" onmouseout="UnTip()">Filter podle typu</h3>-->
 		<span id="filters">
 			<b>Filtr podle typu poradu:</b>
@@ -84,7 +84,7 @@
 	<tr name="{$id}" style="display:none">
 		<td class="program_box"><input type="checkbox" name="id" value="{@id}"/></td>
 		<td class="program_hour"><b><xsl:value-of select="substring(substring-after(casvysilani/text(),' '),1,5)"/></b> (<xsl:value-of select="minutaz/text()"/> min.)</td>
-		<td class="station"><img src="img/{@stanice}.gif" alt="{@stanice}"/></td>
+		<td class="station"><img src="/images/{@stanice}.gif" alt="{@stanice}"/></td>
 		<td class="program_name">
 			<xsl:choose>
 				<xsl:when test="url">
