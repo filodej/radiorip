@@ -1,6 +1,6 @@
 #!/bin/sh
 FILTERS=12,25
-SCHEDULE=
+SCHEDULE=170779635,170877167
 REDIR_BASE=/radiorip/cgi-bin/list.cgi
  
 #echo -n -e "HTTP/1.0 302 Moved Temporarily\r\n"
